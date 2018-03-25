@@ -16,8 +16,13 @@ public class FilterApple {
     /**
      * 定义一个筛选苹果的过滤器接口
      */
+    @FunctionalInterface
     public interface AppleFilter {
         boolean filter(Apple apple);
+
+        default void print() {
+            // 必须实现
+        }
     }
 
     /**
@@ -34,6 +39,7 @@ public class FilterApple {
 
     /**
      * 过滤苹果的方法
+     *
      * @param apples
      * @param appleFilter
      * @return
@@ -64,5 +70,10 @@ public class FilterApple {
         });
         System.out.println(list1);
         System.out.println(list2);
+
+        List<Apple> lambdaList = findApple(apples, apple ->
+                apple.getColor().equals("red") && apple.getWeight() <= 100
+        );
+        System.out.println(lambdaList);
     }
 }
